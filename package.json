@@ -1,0 +1,17 @@
+{
+  "name": "crypto_transfer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "transfer_BTC.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shiyu",
+  "license": "ISC",
+  "dependencies": {
+    "ethers": "^6.7.1",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
+    "web3": "^4.1.1"
+  }
+}
