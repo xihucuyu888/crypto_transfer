@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.5.0",
+    "bitcoinjs-lib": "4.0.3",
+    "bignumber.js": "^8.1.1",
     "coinselect": "^3.1.13",
     "ethers": "^6.7.1",
     "js-yaml": "^4.1.0",
