@@ -5,24 +5,6 @@ const coinSelect = require('coinselect')
 const axios = require('axios')
 const config = require('./configLoad');
 
-const utxoMapper = (utxos) => {
-    utxos = utxos.map(utxo => {
-      const out = {}
-      const amount = new BigNumber(utxo.value).div(1e8).toNumber()
-      _.set(out, 'address', utxo.address)
-      _.set(out, 'txid', utxo.mintTxid)
-      _.set(out, 'txId', utxo.mintTxid)
-      _.set(out, 'vout', utxo.mintIndex)
-      _.set(out, 'scriptPubKey', utxo.script)
-      _.set(out, 'amount', amount)
-      _.set(out, 'satoshis', utxo.value)
-      _.set(out, 'height', utxo.mintHeight)
-      _.set(out, 'confirmations', utxo.confirmations)
-      return _.assign(utxo, out)
-    })
-    return utxos
-  }
-
 class btcBasic{
     constructor(chain){
         this.config = config[chain]
@@ -38,8 +20,26 @@ class btcBasic{
 
     getAddressUtxo = async (address) => {
         const result = await this.get(`/address/${address}?unspent=true&limit=1000`)
-        return utxoMapper(result)
+        return this.utxoMapper(result)
     }
+
+    utxoMapper = (utxos) => {
+        utxos = utxos.map(utxo => {
+          const out = {}
+          const amount = new BigNumber(utxo.value).div(1e8).toNumber()
+          _.set(out, 'address', utxo.address)
+          _.set(out, 'txid', utxo.mintTxid)
+          _.set(out, 'txId', utxo.mintTxid)
+          _.set(out, 'vout', utxo.mintIndex)
+          _.set(out, 'scriptPubKey', utxo.script)
+          _.set(out, 'amount', amount)
+          _.set(out, 'satoshis', utxo.value)
+          _.set(out, 'height', utxo.mintHeight)
+          _.set(out, 'confirmations', utxo.confirmations)
+          return _.assign(utxo, out)
+        })
+        return utxos
+      }
 
     getfeeRate = async() => {
         const result = await this.get('/fee/2')
@@ -73,7 +73,6 @@ class btcBasic{
     
 
     async sendBTC(address,amount){
-
         const feePrice = await this.getfeeRate()
         const feeRate = new BigNumber(feePrice).times(1e8).toNumber()
         const value = new BigNumber(amount).times(1e8).toNumber()

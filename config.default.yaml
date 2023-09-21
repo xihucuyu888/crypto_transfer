@@ -1,0 +1,16 @@
+BTC:
+  URL: 
+  KEYPAIR:
+    - ADDRESS: 
+      PRIKEY: 
+ETH: 
+  URL: 
+  KEYPAIR:
+    - ADDRESS:
+      PRIKEY: 
+
+LTC:
+  URL: 
+  KEYPAIR:
+    - ADDRESS: 
+      PRIKEY:
