@@ -74,7 +74,7 @@ class btcBasic{
 
     async sendBTC(address,amount){
         const feePrice = await this.getfeeRate()
-        const feeRate = new BigNumber(feePrice).times(1e8).toNumber()
+        const feeRate = new BigNumber(feePrice).times(1e8).dividedBy(100).toNumber(BigNumber.ROUND_FLOOR)
         const value = new BigNumber(amount).times(1e8).toNumber()
         const targets = [{
             address,
@@ -111,6 +111,7 @@ class btcBasic{
             console.log(`Transfer ${amount} BTC to ${address}. Transaction Hash: ${hash.txid}`);
 
         } else {
+            console.log(inputs, outputs, fee)
             throw new Error('not enough utxos!!!')
         }
 
