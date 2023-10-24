@@ -11,7 +11,7 @@ class ltcBasic extends btcBasic{
 
     async sendLTC(address,amount){
         const feePrice = await this.getfeeRate()
-        const feeRate = new BigNumber(feePrice).times(1e8).dividedBy(100).toNumber(BigNumber.ROUND_FLOOR)
+        const feeRate = new BigNumber(feePrice).times(1e8).dividedBy(100).intergerValue(BigNumber.ROUND_DOWN).toNumber()
         const value = new BigNumber(amount).times(1e8).toNumber()
         const targets = [{
             address,
