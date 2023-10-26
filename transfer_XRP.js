@@ -28,6 +28,7 @@ console.log(`perpare:${JSON.stringify(prepared)}`)
 const signed = wallet.sign(prepared)
 const tx = await client.submitAndWait(signed.tx_blob)
 console.log(`result: ${JSON.stringify(tx)}`)
+console.log("Transaction Hash:", signed.hash)
 client.disconnect()
 }
 
