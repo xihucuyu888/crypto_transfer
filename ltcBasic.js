@@ -45,7 +45,7 @@ class ltcBasic extends btcBasic{
             //send tx
             const rawtx = tx.uncheckedSerialize()
             const hash = await this.sendTx(rawtx)
-            console.log(`Transfer ${amount} BTC to ${address}. Transaction Hash: ${hash.txid}`);
+            console.log(`Transfer ${amount} LTC to ${address}. Transaction Hash: ${hash.txid}`);
 
         } else {
             throw new Error('not enough utxos!!!')

@@ -70,7 +70,18 @@ class btcBasic{
         return uniqueUTXOs
     }
 
-    
+    network = () => {
+        return bitcoin.networks.testnet
+    }
+
+    genAddressByRandom = () => {
+        const network = this.network()
+        const keyPair = bitcoin.ECPair.makeRandom({ network })
+        const { address } = bitcoin.payments.p2pkh({ pubkey: keyPair.publicKey, network })
+        console.log(`Address: ${address},PrivateKey: ${keyPair.toWIF()}`)
+        return address
+    }
+  
 
     async sendBTC(address,amount){
         const feePrice = await this.getfeeRate()
@@ -91,7 +102,7 @@ class btcBasic{
                 }
                 return output;
             })
-            const network = bitcoin.networks.testnet
+            const network = this.network()
             const tx = new bitcoin.TransactionBuilder(network)
             inputs.forEach((e)=>tx.addInput(e.txid,e.vout))
             filledOutputs.forEach((e)=>tx.addOutput(e.address,e.value))
