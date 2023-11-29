@@ -14,3 +14,9 @@ LTC:
   KEYPAIR:
     - ADDRESS: 
       PRIKEY:
+
+ATOM:
+  URL:
+  KEYPAIR:
+    - ADDRESS:
+      PRIKEY:
