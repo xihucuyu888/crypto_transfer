@@ -14,7 +14,7 @@ const transferAmount = parseFloat(process.argv[3]);
     const api = await ApiPromise.create({ provider: new WsProvider(rpcEndpoint) });
 
     const chainInfo = await api.registry.getChainProperties();
-    const decimals = chainInfo.tokenDecimals.toJSON()[0];
+    const decimals = 10
     const tokenSymbol = chainInfo.tokenSymbol.toJSON()[0];
 
     const keyring = new Keyring({ type: 'ecdsa' });
