@@ -13,6 +13,7 @@
     "@cosmjs/proto-signing": "^0.32.0",
     "@cosmjs/stargate": "^0.32.0",
     "@polkadot/api": "^9.14.2",
+    "@solana/web3.js": "^1.89.1",
     "axios": "^1.5.0",
     "bignumber.js": "^8.1.1",
     "bitcoinjs-lib": "4.0.3",
