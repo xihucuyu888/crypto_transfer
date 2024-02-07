@@ -42,7 +42,8 @@ const client = new TonClient({
     messages: [internal({
         value: ''+ value,
         to: address,
-        body: memo
+        body: memo,
+        bounce:false
     })]
     });
     const res = await contract.send(transfer)
