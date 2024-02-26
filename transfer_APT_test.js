@@ -34,18 +34,18 @@ const address = '0x06053f8dabbde5451abb4a4b42f55f480c1fab23a833c181ded4c556889b0
   //   data: {
   //     function: "0x1::coin::transfer",
   //     typeArguments: ["0x1::aptos_coin::AptosCoin"],
-  //     functionArguments: [address,address, 100],
+  //     functionArguments: [address, 100],
   //   },
   // });
 
-    // const transaction = await aptos.transaction.build.simple({
-  //   sender: from.accountAddress,
-  //   data: {
-  //     function: "0x1::aptos_account::transfer",
-  //     typeArguments: ["0x1::aptos_coin::AptosCoin"],
-  //     functionArguments: [address,address, 100],
-  //   },
-  // });
+    const transaction = await aptos.transaction.build.simple({
+    sender: from.accountAddress,
+    data: {
+      function: "0x1::aptos_account::transfer",
+      typeArguments: [],
+      functionArguments: [address, 100],
+    },
+  });
 
   // const transaction = await aptos.transaction.build.simple({
   //   sender: from.accountAddress,
@@ -65,14 +65,14 @@ const address = '0x06053f8dabbde5451abb4a4b42f55f480c1fab23a833c181ded4c556889b0
   //   },
   // });
 
-    const transaction = await aptos.transaction.build.simple({
-    sender: from.accountAddress,
-    data: {
-      function: "0x1::aptos_account::transfer_coins",
-      typeArguments:["0x718e7f84b82b0648b92b59f986feb6865f56d7f2ca7a2702aff08e8340ac6dd5::moon_coin::MoonCoin"],
-      functionArguments: [address, 100],
-    },
-  });
+  //   const transaction = await aptos.transaction.build.simple({
+  //   sender: from.accountAddress,
+  //   data: {
+  //     function: "0x1::aptos_account::transfer_coins",
+  //     typeArguments:["0x718e7f84b82b0648b92b59f986feb6865f56d7f2ca7a2702aff08e8340ac6dd5::moon_coin::MoonCoin"],
+  //     functionArguments: [address, 100],
+  //   },
+  // });
   
   const pendingTransaction = await aptos.signAndSubmitTransaction({
     signer: from,
