@@ -3,7 +3,7 @@ BTC:
   KEYPAIR:
     - ADDRESS: 
       PRIKEY: 
-      ADDRESS: 
+    - ADDRESS: 
       PRIKEY: 
 ETH: 
   URL:
