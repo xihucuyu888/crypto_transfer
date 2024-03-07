@@ -36,7 +36,7 @@ let keypair = solweb3.Keypair.fromSeed(seed);
           lamports: valueNoDecimal,
         }),
       );
-    let connection = new solweb3.Connection(solweb3.clusterApiUrl("testnet"));
+    let connection = new solweb3.Connection(solweb3.clusterApiUrl("devnet"));
     let tx = await solweb3.sendAndConfirmTransaction(connection, transaction, [keypair]);
     console.log(`Transfer ${value} SOL to ${address}. Transaction Hash: ${tx}`);
 })()
