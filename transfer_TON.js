@@ -32,7 +32,6 @@ const client = new TonClient({
     //gen memo
     timestamp = Date.now()
     memo = 'jptest:' + timestamp
-    console.log(memo)
 
     // Create a transfer
     let seqno = await contract.getSeqno();
