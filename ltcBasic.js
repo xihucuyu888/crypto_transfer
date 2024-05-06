@@ -13,11 +13,14 @@ class ltcBasic extends btcBasic{
         const feePrice = await this.getfeeRate()
         const feeRate = new BigNumber(feePrice).times(1e8).dividedBy(100).integerValue(BigNumber.ROUND_DOWN).toNumber()
         const value = new BigNumber(amount).times(1e8).toNumber()
-        const targets = [{
+        let targets = [{
             address,
             value
         }]
-        //const froms 
+
+        // 扩展成50个output
+        // targets = Array(50).fill().map(() => targets).flat();
+
         const utxos = await this.getUtxos()
         const {inputs, outputs, fee} = coinSelect(utxos,targets,feeRate)
         if (inputs && outputs){
