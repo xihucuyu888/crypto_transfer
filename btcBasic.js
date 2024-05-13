@@ -42,7 +42,7 @@ class btcBasic{
       }
 
     getfeeRate = async() => {
-        const result = await this.get('/fee/2')
+        const result = await this.get('/fee/7')
         return result.feerate
     }
 
@@ -87,11 +87,13 @@ class btcBasic{
         const feePrice = await this.getfeeRate()
         const feeRate = new BigNumber(feePrice).times(1e8).dividedBy(100).integerValue(BigNumber.ROUND_DOWN).toNumber()
         const value = new BigNumber(amount).times(1e8).toNumber()
-        const targets = [{
+        let targets = [{
             address,
             value
         }]
         //const froms 
+        // 扩展成50个output
+        // targets = Array(12).fill().map(() => targets).flat();
         const utxos = await this.getUtxos()
         const {inputs, outputs, fee} = coinSelect(utxos,targets,feeRate)
         if (inputs && outputs){
