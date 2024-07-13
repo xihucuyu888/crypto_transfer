@@ -15,6 +15,7 @@ const memo = 'Hello TON!!'
 
 
 const usdtTokenContractAddress = config['TON'][token]
+const fakeUsdtTokenContractAddress = 'kQBs7dKGUpghDagDubzwsWhj8PG9eUBesDUYxIhBbhQ7E-vt'
 
 // Create Client
 const client = new TonClient({
@@ -60,10 +61,15 @@ async function getUserJettonWalletAddress(userAddress, jettonMasterAddress) {
       neededInit = init;
     }
 
+    //const jettonWalletAddress = await getUserJettonWalletAddress(address, fakeUsdtTokenContractAddress);
     const jettonWalletAddress = await getUserJettonWalletAddress(address, usdtTokenContractAddress);
-    const toAddress = Address.parse((await getUserJettonWalletAddress(to, usdtTokenContractAddress)).toString())
-    const fromAddress =  Address.parse(jettonWalletAddress.toString())
-    const amount = value * 1e9
+    //const toAddress = Address.parse((await getUserJettonWalletAddress(to, usdtTokenContractAddress)).toString({testOnly:true }))
+    const toAddress = Address.parse(to)
+    const fromAddress =  Address.parse(address)
+    const amount = value * 1e6
+
+    console.log('fromJettonAdress: ', jettonWalletAddress.toString({testOnly:true }))
+    console.log('toJettonAdress: ', toAddress)
 
     // Comment payload
     const forwardPayload = beginCell()
@@ -79,14 +85,14 @@ async function getUserJettonWalletAddress(userAddress, jettonMasterAddress) {
       .storeAddress(toAddress)
       .storeAddress(fromAddress) // response destination
       .storeBit(0) // no custom payload
-      .storeCoins(toNano('0.02')) // forward amount - if > 0, will send notification message
+      .storeCoins(1) // forward amount - if > 0, will send notification message
       .storeBit(1) // we store forwardPayload as a reference, set 1 and uncomment next line for have a comment
       .storeRef(forwardPayload)
       .endCell();
 
     const internalMessage = internal({
       to: jettonWalletAddress,
-      value: toNano('0.1'),
+      value: toNano('0.05'),
       bounce: true,
       body: messageBody,
     });
